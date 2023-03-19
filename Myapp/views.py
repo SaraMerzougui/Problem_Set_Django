@@ -11,18 +11,21 @@ def homepage(request):
     context = { 'posts':posts}
     return render(request, 'Myapp/homepage.html',context)
 
+
+
+from .forms import JokeForm
 def addjoke(request):
     if request.method == 'POST':
-        content = request.POST['content']
-        name = request.POST['name']
-        post = Post(content=content, name=name)
-        try:
-            post.save()
-            messages.success(request, 'Your submission has been saved.')
+        form = JokeForm(request.POST)
+        if form.is_valid():
+            # save the post to the database
+            form.save()
+            # redirect to the homepage
             return redirect('homepage')
-        except ValidationError as e:
-            messages.error(request, e.message)
-    return render(request, 'Myapp/addjoke.html')
+    else:
+        form = JokeForm()
+    return render(request, 'Myapp/addjoke.html',{'form':form})
+
 
 
 from django.shortcuts import get_object_or_404
