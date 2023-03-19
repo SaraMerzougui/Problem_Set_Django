@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>add a joke</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background-color: #f5f8fa;
+			font-family: Arial, sans-serif;
+		}
+		.container {
+			margin: 50px auto;
+			max-width: 600px;
+		}
+		.form {
+			background-color: #ffffff;
+			border: 1px solid #e1e8ed;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 20px 35px 20px 20px;
+		}
+		.form label {
+			display: block;
+			font-size: 16px;
+			font-weight: bold;
+			margin-bottom: 10px;
+		}
+		.form input[type="text"], .form textarea {
+			display: block;
+			padding: 10px;
+			border-radius: 5px;
+			border: 1px solid #e1e8ed;
+			margin-bottom: 20px;
+			width: 100%;
+		}
+		.form input[type="submit"] {
+			background-color: #1da1f2;
+			color: #ffffff;
+			border: none;
+			border-radius: 5px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Add a joke</h1>
+		<form  class="form" action="{% url 'addjoke' %}" method="post">
+         {% csrf_token %}
+			<label for="name">Name (max 20 characters):</label>
+			<input type="text" id="name" name="name" maxlength="20" required>
+			<label for="content">Content (between 10 and 120 characters):</label>
+			<textarea id="content" name="content" maxlength="120" required></textarea>
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+</body>
+</html>

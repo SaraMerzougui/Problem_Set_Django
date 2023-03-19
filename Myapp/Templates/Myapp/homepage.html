@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twitter-style Posts with IDs</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body {
+			background-color: #f5f8fa;
+			font-family: Arial, sans-serif;
+		}
+
+		.container {
+			margin: 50px auto;
+			max-width: 600px;
+		}
+		.post {
+			background-color: #ffffff;
+			border: 1px solid #e1e8ed;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 20px;
+		}
+		.post h2 {
+			font-size: 18px;
+			font-weight: bold;
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+		.post p {
+			font-size: 16px;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		.post span {
+			font-size: 12px;
+			color: #8899a6;
+			margin-right: 10px;
+		}
+		h1, .button {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		h1 {
+			margin-right: 20px;
+		}
+		.button {
+			background-color: #4CAF50;
+			border: none;
+			color: white;
+			padding: 15px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			cursor: pointer;
+			margin-bottom: 20px;
+		}
+		.post {
+			margin-bottom: 20px;
+		}
+		.share-link {
+		  /* make the share link inline and align it to the right */
+		  display: inline;
+		  float: right;
+		  margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1> Drop Your Joke</h1>
+		<a href="{% url 'addjoke' %}" class="button">Add a Joke </a>
+
+		{% for post in posts %}
+		<div class="post" id="post{{ post.id }}">
+			<h2>{{ post.name }}</h2>
+			<a  class="share-link" href="{{ post.get_absolute_url }}">Share  <a/>
+
+			<p>{{ post.content }}</p>
+			<span>joke ID: {{ post.id }}</span>
+		</div>
+
+		{% endfor %}
+	</div>
+</body>
+</html>
